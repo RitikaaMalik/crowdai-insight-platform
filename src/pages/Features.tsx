@@ -1,7 +1,9 @@
+
 import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import InteractiveFeatureCard from "@/components/InteractiveFeatureCard";
+import FeatureSection from "@/components/FeatureSection";
 import { Upload, Activity, Bell, ArrowRight, BarChart3, Shield, Users, LineChart, Eye, Zap, BrainCircuit, AlertCircle, Cpu, Lock, Smartphone, Gauge, Clock, Database } from "lucide-react";
 
 const Features = () => {
