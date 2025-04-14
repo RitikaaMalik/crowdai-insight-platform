@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "@/components/NavBar";
@@ -23,15 +22,15 @@ const Index = () => {
     <>
       <NavBar />
       
-      {/* Hero Section */}
-      <section className="relative h-screen bg-gradient-to-br from-crowdai-dark to-black flex items-center justify-center">
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      {/* Hero Section - Updated with gradient background */}
+      <section className="relative h-screen bg-gradient-to-br from-crowdai-blue via-crowdai-purple to-indigo-900 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="mb-8 h-36"> {/* Fixed height for animated text container */}
             <AnimatedText
               texts={[
                 {
-                  text: <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-crowdai-blue to-crowdai-purple">Crowd Detection System</span> and Analysis</h1>,
+                  text: <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200">Crowd Detection System</span> and Analysis</h1>,
                   className: "block"
                 },
                 {
@@ -45,8 +44,10 @@ const Index = () => {
           </div>
           
           <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Button className="bg-crowdai-blue hover:bg-blue-700 text-white px-6 py-6 rounded-md text-lg font-medium">
-              Try Now
+            <Button asChild className="bg-crowdai-blue hover:bg-blue-700 text-white px-6 py-6 rounded-md text-lg font-medium">
+              <Link to="/dashboard">
+                Try Now
+              </Link>
             </Button>
             <Button asChild variant="outline" className="bg-transparent text-white border-white hover:bg-white/10 px-6 py-6 rounded-md text-lg font-medium">
               <Link to="/about/project">

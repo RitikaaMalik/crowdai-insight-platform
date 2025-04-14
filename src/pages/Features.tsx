@@ -1,39 +1,12 @@
-
+import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { ArrowRight, BarChart3, Shield, Users, LineChart, Eye, Zap, BrainCircuit, AlertCircle, Bell, Cpu, Lock, Smartphone, Gauge, Clock, Database } from "lucide-react";
-
-const FeatureSection = ({ 
-  title, 
-  description, 
-  icon, 
-  children, 
-  reversed = false 
-}: { 
-  title: string; 
-  description: string; 
-  icon: React.ReactNode;
-  children: React.ReactNode;
-  reversed?: boolean;
-}) => (
-  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16 ${reversed ? 'bg-gray-50' : 'bg-white'}`}>
-    <div className={`container mx-auto px-4 ${reversed ? 'lg:order-2' : ''}`}>
-      <div className="max-w-xl mx-auto lg:mx-0">
-        <div className="w-16 h-16 bg-crowdai-blue/10 rounded-full flex items-center justify-center mb-6 text-crowdai-blue">
-          {icon}
-        </div>
-        <h2 className="text-3xl font-bold mb-6">{title}</h2>
-        <p className="text-xl text-gray-600 mb-6">{description}</p>
-        {children}
-      </div>
-    </div>
-    <div className={`bg-gradient-to-br from-crowdai-blue to-crowdai-purple h-80 lg:h-full ${reversed ? 'lg:order-1' : ''}`}>
-      {/* Image placeholder */}
-    </div>
-  </div>
-);
+import InteractiveFeatureCard from "@/components/InteractiveFeatureCard";
+import { Upload, Activity, Bell, ArrowRight, BarChart3, Shield, Users, LineChart, Eye, Zap, BrainCircuit, AlertCircle, Cpu, Lock, Smartphone, Gauge, Clock, Database } from "lucide-react";
 
 const Features = () => {
+  const navigate = useNavigate();
+  
   return (
     <>
       <NavBar />
@@ -45,6 +18,36 @@ const Features = () => {
           <p className="text-xl max-w-3xl mx-auto">
             Explore the comprehensive capabilities of our crowd detection and analysis system.
           </p>
+        </div>
+      </section>
+      
+      {/* Interactive Feature Cards */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center">Core Features</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <InteractiveFeatureCard
+              icon={<Upload className="h-6 w-6" />}
+              title="Media Upload"
+              description="Upload images or videos of crowds for detailed analysis and heatmap generation."
+              onClick={() => navigate("/media-upload")}
+            />
+            
+            <InteractiveFeatureCard
+              icon={<Activity className="h-6 w-6" />}
+              title="Heatmap Visualization"
+              description="Advanced visualization of crowd density with customizable thresholds and alerts."
+              onClick={() => navigate("/heatmap")}
+            />
+            
+            <InteractiveFeatureCard
+              icon={<Bell className="h-6 w-6" />}
+              title="Alert System"
+              description="Receive notifications when crowd density exceeds your specified thresholds."
+              onClick={() => navigate("/dashboard")}
+            />
+          </div>
         </div>
       </section>
       
