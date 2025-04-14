@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import FeatureSection from "@/components/FeatureSection";
@@ -52,10 +51,10 @@ const Features = () => {
         </div>
       </section>
       
-      {/* Features Sections */}
-      <section className="pt-24 pb-16" id="feature-details">
+      {/* Features Sections - Add padding top to ensure heading isn't covered by navbar */}
+      <section className="py-16" id="feature-details">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-16 text-center">Feature Details</h2>
+          <h2 className="text-3xl font-bold mb-16 text-center pt-8">Feature Details</h2>
           
           <FeatureSection
             title="Real-Time Monitoring"

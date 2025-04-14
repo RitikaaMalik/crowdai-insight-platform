@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -43,7 +42,6 @@ const HeatmapVisualization = () => {
     }
   };
   
-  // Mock data for historical visualization
   const timePoints = ["8:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
   const densityValues = [15, 35, 65, 85, 55, 70, 30];
   const peopleCountValues = [8, 17, 32, 42, 27, 35, 15];
@@ -52,7 +50,7 @@ const HeatmapVisualization = () => {
     <>
       <NavBar />
       
-      <div className="container mx-auto px-4 py-10">
+      <div className="container mx-auto px-4 pt-24 pb-10">
         <h1 className="text-3xl font-bold mb-8">Crowd Heatmap Visualization</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -69,7 +67,6 @@ const HeatmapVisualization = () => {
               <TabsContent value="live" className="mt-0">
                 <div className="bg-white rounded-lg shadow overflow-hidden">
                   <div className="w-full h-[400px] relative">
-                    {/* Simulated heatmap visualization */}
                     <div className="absolute inset-0" style={{
                       background: `radial-gradient(circle at center, 
                         rgba(239, 68, 68, 0.8) 20%,
@@ -78,7 +75,6 @@ const HeatmapVisualization = () => {
                         transparent)`
                     }}></div>
                     
-                    {/* Simulate people dots */}
                     {Array.from({length: 30}).map((_, i) => (
                       <div 
                         key={i}
@@ -112,7 +108,6 @@ const HeatmapVisualization = () => {
               <TabsContent value="historical" className="mt-0">
                 <div className="bg-white rounded-lg shadow p-6">
                   <div className="w-full h-[350px] relative">
-                    {/* Mock historical chart visualization */}
                     <div className="absolute inset-0 flex flex-col">
                       <div className="flex-1 flex items-end">
                         <div className="w-full flex items-end justify-between h-full">
@@ -241,8 +236,6 @@ const HeatmapVisualization = () => {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </>
   );
 };

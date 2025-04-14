@@ -135,6 +135,11 @@ main.content-area {
   padding-top: 80px;
 }
 
+/* Add specific class for page content that appears below fixed navbar */
+.page-content {
+  padding-top: 5rem; /* 80px equivalent */
+}
+
 /* Team member card styles */
 .team-member-card {
   @apply bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:scale-[1.02];
