@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				crowdai: {
+					blue: '#3B82F6',
+					purple: '#8B5CF6',
+					indigo: '#6366F1',
+					dark: '#1E293B',
+					light: '#F8FAFC',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
