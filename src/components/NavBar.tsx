@@ -59,7 +59,6 @@ const NavBar = () => {
             </div>
             
             <Link to="/features" className="text-crowdai-dark hover:text-crowdai-blue transition-colors">Features</Link>
-            <Link to="/testimonial" className="text-crowdai-dark hover:text-crowdai-blue transition-colors">Testimonial</Link>
             <Link to="/contact" className="text-crowdai-dark hover:text-crowdai-blue transition-colors">Contact Us</Link>
           </nav>
           

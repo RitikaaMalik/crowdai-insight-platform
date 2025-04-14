@@ -1,7 +1,6 @@
 
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
-import { ArrowRight, BarChart3, Shield, Users, LineChart, BrainCircuit, Camera, Server, Lightbulb } from "lucide-react";
+import { ArrowRight, Shield, Users, Clock, Hospital } from "lucide-react";
 
 const AboutProject = () => {
   return (
@@ -52,43 +51,16 @@ const AboutProject = () => {
               </p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-lg flex items-center justify-center">
-              <Camera className="h-32 w-32 text-crowdai-blue" />
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-            <div className="order-2 md:order-1 bg-white p-8 rounded-xl shadow-lg flex items-center justify-center">
-              <BrainCircuit className="h-32 w-32 text-crowdai-purple" />
-            </div>
-            <div className="order-1 md:order-2">
-              <h3 className="text-2xl font-semibold mb-4 text-crowdai-purple">Machine Learning & AI</h3>
-              <p className="text-lg text-gray-700 mb-4">
-                At the core of CrowdAI is a sophisticated machine learning engine that continuously improves its accuracy through exposure to diverse crowd scenarios and feedback mechanisms.
-              </p>
-              <p className="text-lg text-gray-700">
-                Our AI can predict potential crowding issues before they occur, allowing for proactive management rather than reactive responses. The system learns from historical patterns and adapts to the unique characteristics of each venue or location.
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-semibold mb-4 text-crowdai-indigo">Real-Time Processing</h3>
-              <p className="text-lg text-gray-700 mb-4">
-                CrowdAI processes video feeds in real-time, delivering immediate insights without significant latency. This capability is essential for time-sensitive applications such as emergency response or dynamic crowd control.
-              </p>
-              <p className="text-lg text-gray-700">
-                Our edge computing architecture allows for processing to occur close to the data source, reducing bandwidth requirements and enhancing system responsiveness even in environments with limited connectivity.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg flex items-center justify-center">
-              <Server className="h-32 w-32 text-crowdai-indigo" />
+              <svg className="h-32 w-32 text-crowdai-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
             </div>
           </div>
         </div>
       </section>
       
-      {/* Applications Section */}
+      {/* Applications Section - Updated with 3 focused use cases */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">Applications & Use Cases</h2>
@@ -96,61 +68,41 @@ const AboutProject = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-8 rounded-xl">
               <div className="w-12 h-12 bg-crowdai-blue/10 rounded-md flex items-center justify-center mb-4 text-crowdai-blue">
-                <Shield className="h-6 w-6" />
+                <Clock className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Public Safety</h3>
+              <h3 className="text-xl font-semibold mb-3">Time Management</h3>
               <p className="text-gray-700">
-                Monitor public spaces to detect unusual crowd behaviors, excessive densities, or potential safety hazards. Alert security personnel to areas requiring immediate attention.
+                Optimize scheduling and resource allocation by analyzing peak hours and crowd flow patterns. Reduce wait times by predicting busy periods and adjusting staffing levels accordingly.
               </p>
             </div>
             
             <div className="bg-gray-50 p-8 rounded-xl">
               <div className="w-12 h-12 bg-crowdai-purple/10 rounded-md flex items-center justify-center mb-4 text-crowdai-purple">
-                <Users className="h-6 w-6" />
+                <Shield className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Event Management</h3>
+              <h3 className="text-xl font-semibold mb-3">Public Safety</h3>
               <p className="text-gray-700">
-                Optimize entry points, concession placements, and staff allocation based on real-time crowd data. Enhance attendee experience by reducing wait times and congestion.
+                Enhance security by monitoring crowd density and detecting unusual patterns. Prevent overcrowding in public spaces and improve emergency response by identifying potential hazards before they escalate.
               </p>
             </div>
             
             <div className="bg-gray-50 p-8 rounded-xl">
               <div className="w-12 h-12 bg-crowdai-indigo/10 rounded-md flex items-center justify-center mb-4 text-crowdai-indigo">
-                <BarChart3 className="h-6 w-6" />
+                <Hospital className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Retail Analytics</h3>
+              <h3 className="text-xl font-semibold mb-3">Healthcare</h3>
               <p className="text-gray-700">
-                Track customer movement patterns throughout stores to optimize product placements and staffing. Measure conversion rates based on foot traffic compared to purchases.
+                Improve patient flow in hospitals and clinics by monitoring waiting areas and optimizing appointment scheduling. Ensure social distancing in healthcare facilities during outbreaks and peak seasons.
               </p>
             </div>
             
             <div className="bg-gray-50 p-8 rounded-xl">
               <div className="w-12 h-12 bg-crowdai-blue/10 rounded-md flex items-center justify-center mb-4 text-crowdai-blue">
-                <LineChart className="h-6 w-6" />
+                <Users className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Transportation Hubs</h3>
+              <h3 className="text-xl font-semibold mb-3">Event Management</h3>
               <p className="text-gray-700">
-                Monitor passenger flow through terminals, stations, and airports to optimize schedules, staffing, and facility usage based on real-time demand.
-              </p>
-            </div>
-            
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <div className="w-12 h-12 bg-crowdai-purple/10 rounded-md flex items-center justify-center mb-4 text-crowdai-purple">
-                <Lightbulb className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Urban Planning</h3>
-              <p className="text-gray-700">
-                Collect data on pedestrian movement patterns to inform city planning decisions, optimize public space design, and improve infrastructure for pedestrian safety.
-              </p>
-            </div>
-            
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <div className="w-12 h-12 bg-crowdai-indigo/10 rounded-md flex items-center justify-center mb-4 text-crowdai-indigo">
-                <ArrowRight className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Custom Solutions</h3>
-              <p className="text-gray-700">
-                Our flexible system can be tailored to meet the unique requirements of various industries and use cases not listed above. Contact us to discuss your specific needs.
+                Optimize venue layouts and entry/exit points based on crowd flow analysis. Enhance attendee experience by monitoring popular areas and adapting resources in real-time during conferences, concerts, and festivals.
               </p>
             </div>
           </div>
@@ -171,8 +123,6 @@ const AboutProject = () => {
           </div>
         </div>
       </section>
-      
-      <Footer />
     </>
   );
 };

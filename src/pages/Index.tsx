@@ -22,9 +22,9 @@ const Index = () => {
     <>
       <NavBar />
       
-      {/* Hero Section - Updated with gradient background */}
-      <section className="relative h-screen bg-gradient-to-br from-crowdai-blue via-crowdai-purple to-indigo-900 flex items-center justify-center">
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+      {/* Hero Section - Updated with dark gradient background */}
+      <section className="relative h-screen bg-gradient-to-br from-blue-900 via-blue-950 to-black flex items-center justify-center">
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="mb-8 h-36"> {/* Fixed height for animated text container */}
             <AnimatedText
@@ -148,16 +148,11 @@ const Index = () => {
       {/* CTA Section - Simplified */}
       <section className="py-20 bg-gradient-to-r from-crowdai-blue to-crowdai-purple text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
-            Transform your crowd management with our advanced detection system.
+            Get in touch with our team to learn more about our crowd detection system.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild className="bg-white text-crowdai-blue hover:bg-gray-100 px-6 py-6 rounded-md text-lg font-medium">
-              <Link to="/dashboard">
-                Try Now
-              </Link>
-            </Button>
             <Button asChild variant="outline" className="bg-transparent border-white hover:bg-white/10 px-6 py-6 rounded-md text-lg font-medium">
               <Link to="/contact">
                 Contact Us <ArrowRight className="ml-2 h-5 w-5" />

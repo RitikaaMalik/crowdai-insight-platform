@@ -9,7 +9,6 @@ import Index from "./pages/Index";
 import AboutProject from "./pages/AboutProject";
 import AboutTeam from "./pages/AboutTeam";
 import Features from "./pages/Features";
-import Testimonial from "./pages/Testimonial";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import MediaUpload from "./pages/MediaUpload";
@@ -29,7 +28,6 @@ const App = () => (
           <Route path="/about/project" element={<AboutProject />} />
           <Route path="/about/team" element={<AboutTeam />} />
           <Route path="/features" element={<Features />} />
-          <Route path="/testimonial" element={<Testimonial />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/media-upload" element={<MediaUpload />} />

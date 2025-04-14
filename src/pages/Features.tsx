@@ -53,107 +53,87 @@ const Features = () => {
       </section>
       
       {/* Features Sections */}
-      <FeatureSection
-        title="Real-Time Monitoring"
-        description="Monitor crowd density and movement patterns in real-time with advanced computer vision."
-        icon={<Eye className="h-8 w-8" />}
-      >
-        <ul className="space-y-4 mb-6">
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Live crowd density mapping with heat map visualization</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Directional flow analysis of crowd movement</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Automatic detection of unusually dense areas</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Multi-camera integration for comprehensive coverage</span>
-          </li>
-        </ul>
-      </FeatureSection>
-      
-      <FeatureSection
-        title="Advanced Analytics Dashboard"
-        description="Access comprehensive analytics and visualizations to understand crowd behavior."
-        icon={<BarChart3 className="h-8 w-8" />}
-        reversed
-      >
-        <ul className="space-y-4 mb-6">
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Intuitive dashboard with customizable views</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Historical data comparison and trend analysis</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Exportable reports in multiple formats</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Custom KPIs and metrics configuration</span>
-          </li>
-        </ul>
-      </FeatureSection>
-      
-      <FeatureSection
-        title="AI-Powered Insights"
-        description="Leverage machine learning algorithms that improve over time for increasingly accurate analytics."
-        icon={<BrainCircuit className="h-8 w-8" />}
-      >
-        <ul className="space-y-4 mb-6">
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Behavioral pattern recognition and anomaly detection</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Continuous learning system that adapts to your venue</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Demographic insights (optional and privacy-compliant)</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Sentiment analysis for crowd mood estimation</span>
-          </li>
-        </ul>
-      </FeatureSection>
-      
-      <FeatureSection
-        title="Predictive Alerts"
-        description="Receive proactive alerts when crowd conditions approach critical thresholds."
-        icon={<AlertCircle className="h-8 w-8" />}
-        reversed
-      >
-        <ul className="space-y-4 mb-6">
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Customizable alert thresholds based on venue capacity</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Multi-channel notifications (SMS, email, in-app)</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Escalation protocols for critical situations</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-crowdai-blue mr-3">✓</span>
-            <span>Predictive warnings based on trend analysis</span>
-          </li>
-        </ul>
-      </FeatureSection>
+      <section className="pt-24 pb-16" id="feature-details">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-16 text-center">Feature Details</h2>
+          
+          <FeatureSection
+            title="Real-Time Monitoring"
+            description="Monitor crowd density and movement patterns in real-time with advanced computer vision."
+            icon={<Eye className="h-8 w-8" />}
+          >
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Live crowd density mapping with heat map visualization</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Directional flow analysis of crowd movement</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Automatic detection of unusually dense areas</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Multi-camera integration for comprehensive coverage</span>
+              </li>
+            </ul>
+          </FeatureSection>
+          
+          <FeatureSection
+            title="Advanced Analytics Dashboard"
+            description="Access comprehensive analytics and visualizations to understand crowd behavior."
+            icon={<BarChart3 className="h-8 w-8" />}
+            reversed
+          >
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Intuitive dashboard with customizable views</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Historical data comparison and trend analysis</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Exportable reports in multiple formats</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Custom KPIs and metrics configuration</span>
+              </li>
+            </ul>
+          </FeatureSection>
+          
+          <FeatureSection
+            title="Predictive Alerts"
+            description="Receive proactive alerts when crowd conditions approach critical thresholds."
+            icon={<AlertCircle className="h-8 w-8" />}
+          >
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Customizable alert thresholds based on venue capacity</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Multi-channel notifications (SMS, email, in-app)</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Escalation protocols for critical situations</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-crowdai-blue mr-3">✓</span>
+                <span>Predictive warnings based on trend analysis</span>
+              </li>
+            </ul>
+          </FeatureSection>
+        </div>
+      </section>
     </>
   );
 };

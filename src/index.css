@@ -124,3 +124,42 @@
   border-color: hsl(var(--crowdai-blue));
 }
 
+/* Feature page specific styles */
+.feature-detail-section {
+  padding-top: 100px;
+  margin-top: -60px;
+}
+
+/* Fix padding for all pages to ensure nav doesn't cover content */
+main.content-area {
+  padding-top: 80px;
+}
+
+/* Team member card styles */
+.team-member-card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:scale-[1.02];
+}
+
+.team-member-image {
+  @apply w-full h-64 object-cover;
+}
+
+.team-member-info {
+  @apply p-6;
+}
+
+/* Animated glass card effect */
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md shadow-lg rounded-lg border border-gray-100;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  @apply shadow-xl bg-white/90;
+  transform: translateY(-5px);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  @apply bg-gradient-to-r from-crowdai-blue to-crowdai-purple bg-clip-text text-transparent;
+}

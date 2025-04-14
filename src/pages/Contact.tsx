@@ -1,6 +1,5 @@
 
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
@@ -112,80 +111,12 @@ const Contact = () => {
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                   </a>
-                  <a href="#" className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full transition-colors">
-                    <svg className="h-5 w-5 text-crowdai-dark" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z" />
-                    </svg>
-                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find answers to commonly asked questions about our crowd detection system.
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto grid gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">How quickly can the system be implemented?</h3>
-              <p className="text-gray-600">
-                Implementation times vary based on the complexity of your venue and existing infrastructure. A basic setup can be operational within 2-4 weeks, while more complex installations might take 6-8 weeks. Our team works closely with you to establish a realistic timeline during the initial consultation.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">Can CrowdAI integrate with our existing camera system?</h3>
-              <p className="text-gray-600">
-                Yes, CrowdAI is designed to work with most standard CCTV and IP camera systems. During the setup process, we'll evaluate your existing hardware to determine compatibility. In some cases, additional hardware may be recommended for optimal performance.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">How does the system handle privacy concerns?</h3>
-              <p className="text-gray-600">
-                Privacy is a core consideration in our design. CrowdAI focuses on aggregate data and patterns rather than individual identification. The system can be configured to blur faces, and all data processing adheres to relevant privacy regulations including GDPR. We provide detailed documentation on our privacy practices.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">What kind of support do you offer after implementation?</h3>
-              <p className="text-gray-600">
-                We offer several support tiers, from basic technical support to comprehensive managed services. All clients receive system updates and access to our knowledge base. Our premium support packages include dedicated account managers, 24/7 technical assistance, and regular system optimization reviews.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Map Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Visit Our Office</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're located in the heart of Tech City, easily accessible by public transportation.
-            </p>
-          </div>
-          
-          <div className="bg-gray-200 h-96 rounded-lg w-full">
-            {/* Map would be integrated here - placeholder */}
-            <div className="w-full h-full flex items-center justify-center">
-              <p className="text-gray-600 text-lg">Interactive Map</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <Footer />
     </>
   );
 };

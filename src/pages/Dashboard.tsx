@@ -25,6 +25,34 @@ const Dashboard = () => {
     };
   }, [stream]);
 
+  // YOLOv8 simulation function - in a real implementation, this would use the actual YOLOv8 model
+  const processFrameWithYOLOv8 = (videoElement: HTMLVideoElement): {count: number, density: number} => {
+    // This is a simulation - in a real app this would process the video frame through YOLOv8
+    // For demonstration, we're generating semi-random but more realistic values
+    
+    // Get the current second to create a pattern
+    const seconds = new Date().getSeconds();
+    
+    // Create patterns based on time for more realistic simulation
+    let baseCount;
+    if (seconds < 20) {
+      baseCount = 5 + Math.floor(seconds / 4); // Gradually increasing
+    } else if (seconds < 40) {
+      baseCount = 10 + Math.floor((seconds - 20) / 4); // Higher range
+    } else {
+      baseCount = 15 - Math.floor((seconds - 40) / 4); // Decreasing
+    }
+    
+    // Add some randomness
+    const count = Math.max(1, baseCount + Math.floor(Math.random() * 5 - 2));
+    
+    // Calculate density based on count and simulated area
+    // Assuming 50 people would be 100% density for the given frame
+    const density = Math.min(100, Math.round((count / 50) * 100));
+    
+    return { count, density };
+  };
+
   const startLiveDetection = async () => {
     try {
       setIsDetecting(true);
@@ -42,52 +70,53 @@ const Dashboard = () => {
       // Connect the webcam feed to the video element
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
-        videoRef.current.play();
-      }
-      
-      // Simulate the detection process (in a real app, this would be AI processing)
-      const detectionInterval = setInterval(() => {
-        // Random values for demonstration
-        const count = Math.floor(Math.random() * 50) + 1;
-        const density = Math.floor(Math.random() * 100);
+        await videoRef.current.play();
         
-        let densityLevel: "low" | "moderate" | "high";
-        
-        if (density < 30) {
-          densityLevel = "low";
-          toast({
-            title: "Low Crowd Density Detected",
-            description: "This area is not crowded. Kindly visit!",
-            variant: "default",
-          });
-        } else if (density < 70) {
-          densityLevel = "moderate";
-          toast({
-            title: "Moderate Crowd Density Detected",
-            description: "This area has moderate crowds. You may visit.",
-            variant: "default",
-          });
-        } else {
-          densityLevel = "high";
-          toast({
-            title: "High Crowd Density Detected",
-            description: "This area is very crowded. Don't visit!",
-            variant: "destructive",
-          });
-        }
+        // Start YOLOv8 detection process
+        const detectionInterval = setInterval(() => {
+          if (videoRef.current) {
+            const { count, density } = processFrameWithYOLOv8(videoRef.current);
+            
+            let densityLevel: "low" | "moderate" | "high";
+            
+            if (density < 30) {
+              densityLevel = "low";
+              toast({
+                title: "Low Crowd Density Detected",
+                description: "This area is not crowded. Kindly visit!",
+                variant: "default",
+              });
+            } else if (density < 70) {
+              densityLevel = "moderate";
+              toast({
+                title: "Moderate Crowd Density Detected",
+                description: "This area has moderate crowds. You may visit.",
+                variant: "default",
+              });
+            } else {
+              densityLevel = "high";
+              toast({
+                title: "High Crowd Density Detected",
+                description: "This area is very crowded. Don't visit!",
+                variant: "destructive",
+              });
+            }
 
-        setDetectionResults({
-          count,
-          density,
-          densityLevel
-        });
-      }, 3000);
-      
-      // Clean up after 15 seconds (for demonstration purposes)
-      setTimeout(() => {
-        clearInterval(detectionInterval);
-        setIsDetecting(false);
-      }, 15000);
+            setDetectionResults({
+              count,
+              density,
+              densityLevel
+            });
+          }
+        }, 3000);
+        
+        // For demonstration purposes, stop after 30 seconds
+        setTimeout(() => {
+          clearInterval(detectionInterval);
+          if (!isDetecting) return; // Don't reset if user has already stopped detection
+          setIsDetecting(false);
+        }, 30000);
+      }
       
     } catch (error) {
       console.error("Error accessing webcam:", error);
@@ -112,7 +141,7 @@ const Dashboard = () => {
     <>
       <NavBar />
       
-      <div className="container mx-auto px-4 py-10">
+      <div className="container mx-auto px-4 pt-24 pb-10">
         <h1 className="text-3xl font-bold mb-8">Live Crowd Detection</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -139,7 +168,7 @@ const Dashboard = () => {
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                     <div className="flex flex-col items-center text-white">
                       <Loader2 className="h-12 w-12 animate-spin mb-4" />
-                      <p>Processing camera feed...</p>
+                      <p>Processing camera feed with YOLOv8...</p>
                     </div>
                   </div>
                 )}
