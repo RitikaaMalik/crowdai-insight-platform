@@ -1,11 +1,11 @@
 
 import { useState } from "react";
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Upload, Image, Video, Trash2, AlertTriangle, FileUp } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 const MediaUpload = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,16 +17,20 @@ const MediaUpload = () => {
     coveredArea: number;
     densityLevel: "low" | "moderate" | "high";
   } | null>(null);
+  const [mediaType, setMediaType] = useState<"image" | "video">("image");
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
       
-      // Check if file is image or video
-      if (!selectedFile.type.match('image.*') && !selectedFile.type.match('video.*')) {
+      // Check if file matches the current tab type
+      const isImage = selectedFile.type.match('image.*');
+      const isVideo = selectedFile.type.match('video.*');
+      
+      if ((mediaType === "image" && !isImage) || (mediaType === "video" && !isVideo)) {
         toast({
-          title: "Invalid file type",
-          description: "Please upload an image or video file.",
+          title: `Invalid file type`,
+          description: `Please upload ${mediaType === "image" ? "an image" : "a video"} file.`,
           variant: "destructive",
         });
         return;
@@ -34,8 +38,8 @@ const MediaUpload = () => {
       
       setFile(selectedFile);
       
-      // Create preview for images only
-      if (selectedFile.type.match('image.*')) {
+      // Create preview for images
+      if (isImage) {
         const reader = new FileReader();
         reader.onload = (e) => {
           if (e.target?.result) {
@@ -44,7 +48,6 @@ const MediaUpload = () => {
         };
         reader.readAsDataURL(selectedFile);
       } else {
-        // For video, we'll just show an icon
         setPreview(null);
       }
       
@@ -120,78 +123,149 @@ const MediaUpload = () => {
             <div className="bg-white p-6 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-4">Upload Media</h2>
               
-              {!file ? (
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                  <input
-                    type="file"
-                    id="file-upload"
-                    className="hidden"
-                    accept="image/*,video/*"
-                    onChange={handleFileChange}
-                  />
-                  <label htmlFor="file-upload" className="cursor-pointer">
-                    <div className="mx-auto w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                      <Upload className="h-6 w-6 text-gray-500" />
-                    </div>
-                    <p className="text-gray-700 font-medium">Click to upload</p>
-                    <p className="text-sm text-gray-500 mt-1">Support for images and videos</p>
-                  </label>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      {file.type.match('image.*') ? (
-                        <Image className="h-5 w-5 text-blue-500 mr-2" />
-                      ) : (
-                        <Video className="h-5 w-5 text-purple-500 mr-2" />
-                      )}
-                      <span className="text-sm text-gray-700 truncate max-w-[200px]">
-                        {file.name}
-                      </span>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={clearFile}
-                      disabled={isProcessing}
-                    >
-                      <Trash2 className="h-4 w-4 text-gray-500" />
-                    </Button>
-                  </div>
-                  
-                  {preview && (
-                    <div className="relative w-full h-40 bg-gray-100 rounded overflow-hidden">
-                      <img 
-                        src={preview} 
-                        alt="Preview" 
-                        className="w-full h-full object-contain"
+              <Tabs 
+                defaultValue="image" 
+                className="mb-6"
+                onValueChange={(value) => {
+                  setMediaType(value as "image" | "video");
+                  clearFile();
+                }}
+              >
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="image" className="flex items-center gap-2">
+                    <Image className="h-4 w-4" />
+                    Images
+                  </TabsTrigger>
+                  <TabsTrigger value="video" className="flex items-center gap-2">
+                    <Video className="h-4 w-4" />
+                    Videos
+                  </TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="image" className="mt-4">
+                  {!file ? (
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                      <input
+                        type="file"
+                        id="image-upload"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleFileChange}
                       />
+                      <label htmlFor="image-upload" className="cursor-pointer">
+                        <div className="mx-auto w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                          <Image className="h-6 w-6 text-gray-500" />
+                        </div>
+                        <p className="text-gray-700 font-medium">Click to upload image</p>
+                        <p className="text-sm text-gray-500 mt-1">JPG, PNG, WEBP formats supported</p>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Image className="h-5 w-5 text-blue-500 mr-2" />
+                          <span className="text-sm text-gray-700 truncate max-w-[200px]">
+                            {file.name}
+                          </span>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={clearFile}
+                          disabled={isProcessing}
+                        >
+                          <Trash2 className="h-4 w-4 text-gray-500" />
+                        </Button>
+                      </div>
+                      
+                      {preview && (
+                        <div className="relative w-full h-40 bg-gray-100 rounded overflow-hidden">
+                          <img 
+                            src={preview} 
+                            alt="Preview" 
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      )}
+                      
+                      <Button 
+                        className="w-full"
+                        onClick={processFile}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <span className="flex items-center">
+                            <FileUp className="animate-bounce mr-2 h-4 w-4" />
+                            Processing...
+                          </span>
+                        ) : (
+                          "Process Image"
+                        )}
+                      </Button>
                     </div>
                   )}
-                  
-                  {!preview && file.type.match('video.*') && (
-                    <div className="w-full h-40 bg-gray-100 rounded flex items-center justify-center">
-                      <Video className="h-12 w-12 text-gray-400" />
+                </TabsContent>
+                
+                <TabsContent value="video" className="mt-4">
+                  {!file ? (
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                      <input
+                        type="file"
+                        id="video-upload"
+                        className="hidden"
+                        accept="video/*"
+                        onChange={handleFileChange}
+                      />
+                      <label htmlFor="video-upload" className="cursor-pointer">
+                        <div className="mx-auto w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                          <Video className="h-6 w-6 text-gray-500" />
+                        </div>
+                        <p className="text-gray-700 font-medium">Click to upload video</p>
+                        <p className="text-sm text-gray-500 mt-1">MP4, MOV, AVI formats supported</p>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Video className="h-5 w-5 text-purple-500 mr-2" />
+                          <span className="text-sm text-gray-700 truncate max-w-[200px]">
+                            {file.name}
+                          </span>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={clearFile}
+                          disabled={isProcessing}
+                        >
+                          <Trash2 className="h-4 w-4 text-gray-500" />
+                        </Button>
+                      </div>
+                      
+                      <div className="w-full h-40 bg-gray-100 rounded flex items-center justify-center">
+                        <Video className="h-12 w-12 text-gray-400" />
+                      </div>
+                      
+                      <Button 
+                        className="w-full"
+                        onClick={processFile}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <span className="flex items-center">
+                            <FileUp className="animate-bounce mr-2 h-4 w-4" />
+                            Processing...
+                          </span>
+                        ) : (
+                          "Process Video"
+                        )}
+                      </Button>
                     </div>
                   )}
-                  
-                  <Button 
-                    className="w-full"
-                    onClick={processFile}
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <span className="flex items-center">
-                        <FileUp className="animate-bounce mr-2 h-4 w-4" />
-                        Processing...
-                      </span>
-                    ) : (
-                      "Process Media"
-                    )}
-                  </Button>
-                </div>
-              )}
+                </TabsContent>
+              </Tabs>
             </div>
             
             {results && (
@@ -277,20 +351,18 @@ const MediaUpload = () => {
               <div className="h-[300px] flex items-center justify-center text-gray-500 italic">
                 {file ? (
                   isProcessing ? (
-                    <p>Processing your media...</p>
+                    <p>Processing your {mediaType}...</p>
                   ) : (
-                    <p>Click "Process Media" to analyze</p>
+                    <p>Click "Process {mediaType}" to analyze</p>
                   )
                 ) : (
-                  <p>Upload media to see analysis results</p>
+                  <p>Upload {mediaType} to see analysis results</p>
                 )}
               </div>
             )}
           </div>
         </div>
       </div>
-      
-      <Footer />
     </>
   );
 };

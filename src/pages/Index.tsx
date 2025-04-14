@@ -1,10 +1,10 @@
+
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import AnimatedText from "@/components/AnimatedText";
 import FeatureCard from "@/components/FeatureCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, Shield, Users, LineChart, Eye, Zap, BrainCircuit } from "lucide-react";
 
@@ -145,58 +145,22 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Testimonials Preview */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover how CrowdAI has transformed operations for organizations across various sectors.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TestimonialCard
-              content="The CrowdAI system has completely transformed how we manage event security. The real-time alerts have helped us prevent several potential safety incidents."
-              author="Sarah Johnson"
-              role="Head of Security, Metro Events"
-            />
-            <TestimonialCard
-              content="As a shopping mall manager, understanding customer flow patterns has always been challenging. CrowdAI provides insights that have helped us optimize store layouts and staffing."
-              author="Michael Chen"
-              role="Operations Director, Westside Mall"
-            />
-            <TestimonialCard
-              content="The predictive analytics have been a game-changer for our transit system. We can now anticipate crowding before it happens and adjust our services accordingly."
-              author="David Rodriguez"
-              role="CTO, Urban Transport Authority"
-            />
-          </div>
-          
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" className="border-crowdai-blue text-crowdai-blue hover:bg-crowdai-blue/10">
-              <Link to="/testimonial">
-                Read More Testimonials <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
+      {/* CTA Section - Simplified */}
       <section className="py-20 bg-gradient-to-r from-crowdai-blue to-crowdai-purple text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Crowd Management?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
-            Join organizations around the world who are making data-driven decisions with CrowdAI's advanced crowd detection system.
+            Transform your crowd management with our advanced detection system.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button className="bg-white text-crowdai-blue hover:bg-gray-100 px-6 py-6 rounded-md text-lg font-medium">
-              Get Started Now
+            <Button asChild className="bg-white text-crowdai-blue hover:bg-gray-100 px-6 py-6 rounded-md text-lg font-medium">
+              <Link to="/dashboard">
+                Try Now
+              </Link>
             </Button>
             <Button asChild variant="outline" className="bg-transparent border-white hover:bg-white/10 px-6 py-6 rounded-md text-lg font-medium">
               <Link to="/contact">
-                Contact Sales <ArrowRight className="ml-2 h-5 w-5" />
+                Contact Us <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>

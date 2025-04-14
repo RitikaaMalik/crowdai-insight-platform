@@ -1,11 +1,11 @@
 
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 interface TeamMemberProps {
   name: string;
   role: string;
+  education: string;
   bio: string;
   email: string;
   image?: string;
@@ -13,20 +13,21 @@ interface TeamMemberProps {
   github?: string;
 }
 
-const TeamMember = ({ name, role, bio, email, image, linkedin, github }: TeamMemberProps) => (
+const TeamMember = ({ name, role, education, bio, email, image, linkedin, github }: TeamMemberProps) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
-    <div className="h-48 bg-gradient-to-r from-crowdai-blue to-crowdai-purple flex items-center justify-center">
+    <div className="h-64 bg-gradient-to-r from-crowdai-blue to-crowdai-purple flex items-center justify-center">
       {image ? (
-        <img src={image} alt={name} className="h-32 w-32 rounded-full border-4 border-white" />
+        <img src={image} alt={name} className="h-48 w-48 object-cover rounded-full border-4 border-white" />
       ) : (
-        <div className="h-32 w-32 rounded-full bg-white flex items-center justify-center text-4xl font-bold text-crowdai-blue">
+        <div className="h-48 w-48 rounded-full bg-white flex items-center justify-center text-4xl font-bold text-crowdai-blue">
           {name.charAt(0)}
         </div>
       )}
     </div>
     <div className="p-6">
       <h3 className="text-xl font-bold mb-1">{name}</h3>
-      <p className="text-crowdai-blue mb-3">{role}</p>
+      <p className="text-crowdai-blue mb-2">{role}</p>
+      <p className="text-gray-600 mb-3"><strong>Education:</strong> {education}</p>
       <p className="text-gray-600 mb-4">{bio}</p>
       <div className="flex space-x-3">
         <a href={`mailto:${email}`} className="text-gray-500 hover:text-crowdai-blue">
@@ -53,44 +54,47 @@ const AboutTeam = () => {
     {
       name: "Alex Johnson",
       role: "Project Lead & AI Specialist",
+      education: "M.S. in Computer Science, Stanford University",
       bio: "Alex has over 10 years of experience in AI and machine learning, specializing in computer vision applications. He leads the overall development and strategic direction of CrowdAI.",
       email: "alex.johnson@crowdai.com",
-      linkedin: "https://linkedin.com/in/alexjohnson"
+      linkedin: "https://linkedin.com/in/alexjohnson",
+      github: "https://github.com/alexjohnson"
     },
     {
       name: "Sophia Chen",
       role: "Computer Vision Engineer",
+      education: "Ph.D. in Computer Science, MIT",
       bio: "Sophia is an expert in computer vision algorithms with a Ph.D. in Computer Science. She designs and optimizes the core detection models used in the CrowdAI system.",
       email: "sophia.chen@crowdai.com",
-      github: "https://github.com/sophiachen"
+      github: "https://github.com/sophiachen",
+      linkedin: "https://linkedin.com/in/sophiachen"
     },
     {
       name: "Marcus Rodriguez",
       role: "Backend Developer",
+      education: "B.S. in Software Engineering, University of California",
       bio: "Marcus specializes in scalable backend systems and real-time data processing. He ensures CrowdAI can handle massive data volumes with minimal latency.",
       email: "marcus.rodriguez@crowdai.com",
-      github: "https://github.com/marcusrod"
+      github: "https://github.com/marcusrod",
+      linkedin: "https://linkedin.com/in/marcusrodriguez"
     },
     {
       name: "Priya Patel",
       role: "UX/UI Designer",
+      education: "M.F.A. in Interaction Design, Rhode Island School of Design",
       bio: "Priya creates intuitive interfaces that make complex analytics accessible. Her design approach focuses on clarity and actionable insights for users of all technical levels.",
       email: "priya.patel@crowdai.com",
-      linkedin: "https://linkedin.com/in/priyapatel"
+      linkedin: "https://linkedin.com/in/priyapatel",
+      github: "https://github.com/priyapatel"
     },
     {
       name: "David Kim",
       role: "Data Scientist",
+      education: "M.S. in Data Science, University of Washington",
       bio: "David applies statistical methods and predictive modeling to enhance the accuracy of crowd analysis. He specializes in pattern recognition and anomaly detection.",
       email: "david.kim@crowdai.com",
-      github: "https://github.com/davidkim"
-    },
-    {
-      name: "Emma Williams",
-      role: "Product Manager",
-      bio: "Emma bridges the gap between technical development and client needs. She ensures CrowdAI delivers practical solutions to real-world crowd management challenges.",
-      email: "emma.williams@crowdai.com",
-      linkedin: "https://linkedin.com/in/emmawilliams"
+      github: "https://github.com/davidkim",
+      linkedin: "https://linkedin.com/in/davidkim"
     }
   ];
 
@@ -125,24 +129,6 @@ const AboutTeam = () => {
           </div>
         </div>
       </section>
-      
-      {/* Join Our Team */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Join Our Team</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
-            We're always looking for talented individuals who are passionate about AI, computer vision, and creating technology that makes a difference. Check out our open positions or send us your resume.
-          </p>
-          <a 
-            href="/contact" 
-            className="inline-block bg-crowdai-blue hover:bg-blue-700 text-white px-6 py-3 rounded-md text-lg font-medium transition-colors"
-          >
-            View Open Positions
-          </a>
-        </div>
-      </section>
-      
-      <Footer />
     </>
   );
 };

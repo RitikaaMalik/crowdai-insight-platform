@@ -1,7 +1,6 @@
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Camera, AlertTriangle, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -14,49 +13,99 @@ const Dashboard = () => {
     density: number;
     densityLevel: "low" | "moderate" | "high";
   } | null>(null);
-
-  const startLiveDetection = () => {
-    setIsDetecting(true);
-    
-    // Simulate the detection process
-    setTimeout(() => {
-      // Random values for demonstration
-      const count = Math.floor(Math.random() * 50) + 1;
-      const density = Math.floor(Math.random() * 100);
-      
-      let densityLevel: "low" | "moderate" | "high";
-      
-      if (density < 30) {
-        densityLevel = "low";
-        toast({
-          title: "Low Crowd Density Detected",
-          description: "This area is not crowded. Kindly visit!",
-          variant: "default",
-        });
-      } else if (density < 70) {
-        densityLevel = "moderate";
-        toast({
-          title: "Moderate Crowd Density Detected",
-          description: "This area has moderate crowds. You may visit.",
-          variant: "default",
-        });
-      } else {
-        densityLevel = "high";
-        toast({
-          title: "High Crowd Density Detected",
-          description: "This area is very crowded. Don't visit!",
-          variant: "destructive",
-        });
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Clean up webcam stream when component unmounts
+  useEffect(() => {
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
       }
+    };
+  }, [stream]);
 
-      setDetectionResults({
-        count,
-        density,
-        densityLevel
+  const startLiveDetection = async () => {
+    try {
+      setIsDetecting(true);
+      
+      // Request access to the webcam
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        } 
       });
       
+      setStream(mediaStream);
+      
+      // Connect the webcam feed to the video element
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+        videoRef.current.play();
+      }
+      
+      // Simulate the detection process (in a real app, this would be AI processing)
+      const detectionInterval = setInterval(() => {
+        // Random values for demonstration
+        const count = Math.floor(Math.random() * 50) + 1;
+        const density = Math.floor(Math.random() * 100);
+        
+        let densityLevel: "low" | "moderate" | "high";
+        
+        if (density < 30) {
+          densityLevel = "low";
+          toast({
+            title: "Low Crowd Density Detected",
+            description: "This area is not crowded. Kindly visit!",
+            variant: "default",
+          });
+        } else if (density < 70) {
+          densityLevel = "moderate";
+          toast({
+            title: "Moderate Crowd Density Detected",
+            description: "This area has moderate crowds. You may visit.",
+            variant: "default",
+          });
+        } else {
+          densityLevel = "high";
+          toast({
+            title: "High Crowd Density Detected",
+            description: "This area is very crowded. Don't visit!",
+            variant: "destructive",
+          });
+        }
+
+        setDetectionResults({
+          count,
+          density,
+          densityLevel
+        });
+      }, 3000);
+      
+      // Clean up after 15 seconds (for demonstration purposes)
+      setTimeout(() => {
+        clearInterval(detectionInterval);
+        setIsDetecting(false);
+      }, 15000);
+      
+    } catch (error) {
+      console.error("Error accessing webcam:", error);
+      toast({
+        title: "Camera Access Failed",
+        description: "Unable to access your camera. Please check permissions.",
+        variant: "destructive",
+      });
       setIsDetecting(false);
-    }, 3000);
+    }
+  };
+  
+  const stopDetection = () => {
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+      setStream(null);
+    }
+    setIsDetecting(false);
   };
 
   return (
@@ -67,12 +116,41 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold mb-8">Live Crowd Detection</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 bg-gray-100 rounded-lg h-[400px] flex items-center justify-center">
+          <div className="lg:col-span-2 bg-gray-100 rounded-lg h-[400px] flex items-center justify-center relative overflow-hidden">
             {isDetecting ? (
-              <div className="flex flex-col items-center">
-                <Loader2 className="h-12 w-12 text-crowdai-blue animate-spin" />
-                <p className="mt-4 text-gray-600">Processing camera feed...</p>
-              </div>
+              <>
+                <video 
+                  ref={videoRef} 
+                  className="absolute inset-0 w-full h-full object-cover"
+                  muted
+                  playsInline
+                />
+                {detectionResults && (
+                  <div className="absolute inset-0" style={{
+                    background: `linear-gradient(to bottom, 
+                      ${detectionResults.densityLevel === "high" ? "rgba(239, 68, 68, 0.6)" : 
+                        detectionResults.densityLevel === "moderate" ? "rgba(245, 158, 11, 0.6)" : 
+                        "rgba(34, 197, 94, 0.6)"}, 
+                      transparent 70%)`,
+                    pointerEvents: "none"
+                  }}></div>
+                )}
+                {!detectionResults && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <div className="flex flex-col items-center text-white">
+                      <Loader2 className="h-12 w-12 animate-spin mb-4" />
+                      <p>Processing camera feed...</p>
+                    </div>
+                  </div>
+                )}
+                {detectionResults && (
+                  <div className="absolute top-4 left-4 text-white font-bold text-xl text-shadow">
+                    {detectionResults.densityLevel === "high" ? "HIGH DENSITY" : 
+                     detectionResults.densityLevel === "moderate" ? "MODERATE DENSITY" : 
+                     "LOW DENSITY"}
+                  </div>
+                )}
+              </>
             ) : detectionResults ? (
               <div className="w-full h-full p-4">
                 <div className="w-full h-full relative rounded-lg overflow-hidden">
@@ -158,14 +236,14 @@ const Dashboard = () => {
             </div>
             
             <Button 
-              onClick={startLiveDetection} 
-              disabled={isDetecting}
+              onClick={isDetecting ? stopDetection : startLiveDetection} 
               className="w-full"
+              variant={isDetecting ? "destructive" : "default"}
             >
               {isDetecting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
+                  Stop Detection
                 </>
               ) : (
                 <>
@@ -176,8 +254,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </>
   );
 };
